@@ -6,23 +6,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.derrysetya.testsekolah.model.MapelModel;
+import com.derrysetya.testsekolah.model.GuruModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
-import com.derrysetya.testsekolah.repo.MapelRepo;
+import com.derrysetya.testsekolah.repo.GuruRepo;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
 
 @Service
-public class MapelService {
+public class GuruService {
 	
 	@Autowired
-	MapelRepo repo;
+	GuruRepo repo;
 	
-	public List<MapelModel> getAll(){
+	public List<GuruModel> getAll(){
 		return repo.findAll();
 	}
 	
-	public MapelModel getById(Long id) {
-		Optional<MapelModel> opt = null;
+	public GuruModel getById(Long id) {
+		Optional<GuruModel> opt = null;
 		
 		
 		opt = repo.findById(id);
@@ -32,10 +32,11 @@ public class MapelService {
 		}else {			
 			return null;
 		}
+		
 	}
 	
 	
-	public MapelModel save(MapelModel model) {
+	public GuruModel save(GuruModel model) {
 		return repo.save(model);
 	}
 	

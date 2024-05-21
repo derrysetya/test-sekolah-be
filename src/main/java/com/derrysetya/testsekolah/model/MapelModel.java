@@ -6,8 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter @Setter
+@ToString
 @Table(name = "mst_mapel")
 public class MapelModel {
 	
@@ -16,41 +21,13 @@ public class MapelModel {
 	@Column(name = "id")
 	private Long id;
 	
+	@Column(name = "id_guru")
+	private Long idGuru;
+	
 	@Column(name = "nama")
 	private String nama;
 	
 	@Column(name = "kkm")
 	private Integer kkm;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNama() {
-		return nama;
-	}
-
-	public void setNama(String nama) {
-		this.nama = nama;
-	}
-
-	public Integer getKkm() {
-		return kkm;
-	}
-
-	public void setKkm(Integer kkm) {
-		this.kkm = kkm;
-	}
-
-	@Override
-	public String toString() {
-		return "MapelModel [id=" + id + ", nama=" + nama + ", kkm=" + kkm + "]";
-	}
-
-	
 
 }

@@ -1,5 +1,6 @@
 package com.derrysetya.testsekolah.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.response.ApiResponse;
 import com.derrysetya.testsekolah.service.MapelService;
 import com.derrysetya.testsekolah.service.SiswaService;
+import com.derrysetya.testsekolah.utils.ResponseUtils;
 
 @RestController
 @RequestMapping("${rest.pathPrefix:api}/mapel")
@@ -24,31 +27,111 @@ public class MapelController {
 	MapelService service;
 	
 	@PostMapping(value = "/save")
-	MapelModel save(@RequestBody MapelModel model){
-		return service.save(model);
+	ApiResponse save(@RequestBody MapelModel model){
+		ApiResponse resp = new ApiResponse();
+		MapelModel newMapel = new MapelModel();
+		
+		try {
+			
+			newMapel = service.save(model);
+			
+			resp = ResponseUtils.getSuccess();
+			
+			resp.setResult(newMapel);
+			
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error save mapel");
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
+		}
 	}
 	
 	@GetMapping(value = "/all")
-	List<MapelModel> getAll(){
-		return service.getAll();
+	ApiResponse getAll(){
+		ApiResponse resp = new ApiResponse();
+		List<MapelModel> listMapel = new ArrayList<>();
+		
+		try {
+			
+			listMapel = service.getAll();
+			
+			resp = ResponseUtils.getSuccess();
+			
+			resp.setResult(listMapel);
+			
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error get all mapel");
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
+		}
 	}
 	
 	@GetMapping()
-	MapelModel getById(@RequestParam(required = true, name = "id") String id){
-		return service.getById(Long.valueOf(id));
+	ApiResponse getById(@RequestParam(required = true, name = "id") String id){
+		ApiResponse resp = new ApiResponse();
+		MapelModel model = new MapelModel();
+		
+		try {
+			
+			model = service.getById(Long.valueOf(id));
+			
+			resp = ResponseUtils.getSuccess();
+			
+			resp.setResult(model);
+			
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error get mapel by "+id);
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
+		}
+		
 	}
 	
 	@PostMapping(value = "/delete")
-	String deleteByid(@RequestParam(required = true, name = "id") String id){
-		
+	ApiResponse deleteByid(@RequestParam(required = true, name = "id") String id){
+		ApiResponse resp = new ApiResponse();
 		MapelModel model = service.getById(Long.valueOf(id));
 		
-		if(model == null) {
-			return "mapel tidak ditemukan";
-		}else {
+		try {
+			model = service.getById(Long.valueOf(id));
 			
-			service.deleteById(Long.valueOf(id));
-			return "mapel berhasil di delete";
+			if(model == null) {
+				resp = ResponseUtils.getFailed();
+			}else {
+				
+				service.deleteById(Long.valueOf(id));
+				resp = ResponseUtils.getSuccess();
+				
+			}
+			
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error delete mapel by "+id);
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
 		}
 		
 		

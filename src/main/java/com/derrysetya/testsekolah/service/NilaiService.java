@@ -31,9 +31,9 @@ public class NilaiService {
 		
 		if(opt.isPresent()) {
 			return opt.get();
+		}else {			
+			return null;
 		}
-		
-		return null;
 	}
 	
 	

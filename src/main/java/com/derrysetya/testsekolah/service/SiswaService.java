@@ -13,33 +13,33 @@ import com.derrysetya.testsekolah.repo.SiswaRepo;
 public class SiswaService {
 	
 	@Autowired
-	SiswaRepo siswaRepo;
+	SiswaRepo repo;
 	
 	public List<SiswaModel> getAll(){
-		return siswaRepo.findAll();
+		return repo.findAll();
 	}
 	
 	public SiswaModel getById(Long id) {
 		Optional<SiswaModel> optSiswa = null;
 		
 		
-		optSiswa = siswaRepo.findById(id);
+		optSiswa = repo.findById(id);
 		
 		if(optSiswa.isPresent()) {
 			return optSiswa.get();
+		}else {			
+			return null;
 		}
-		
-		return null;
 	}
 	
 	
 	public SiswaModel save(SiswaModel model) {
-		return siswaRepo.save(model);
+		return repo.save(model);
 	}
 	
 	
 	public void deleteById(Long id) {
-		siswaRepo.deleteById(id);
+		repo.deleteById(id);
 	}
 
 }

@@ -11,29 +11,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter@Setter
+@Getter @Setter
 @ToString
-@Table(name = "dat_nilai")
-public class NilaiModel {
+@Table(name = "mst_guru")
+public class GuruModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "id_siswa")
-	private Long idSiswa;
-	
-	@Column(name = "id_mapel")
-	private Long idMapel;
-	
-	@Column(name = "uts")
-	private Integer uts;
-	
-	@Column(name = "uas")
-	private Integer uas;
+	@Column(name = "nama")
+	private String nama;
 	
 	
-	
+	@Column(name = "alamat")
+	private String alamat;
 
 }
