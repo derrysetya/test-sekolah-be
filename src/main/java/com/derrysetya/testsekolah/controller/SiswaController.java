@@ -21,7 +21,7 @@ public class SiswaController {
 	@Autowired
 	SiswaService siswaService;
 	
-	@PostMapping()
+	@PostMapping(value = "/save")
 	SiswaModel save(@RequestBody SiswaModel model){
 		return siswaService.save(model);
 	}
@@ -36,7 +36,7 @@ public class SiswaController {
 		return siswaService.getById(Long.valueOf(id));
 	}
 	
-	@DeleteMapping()
+	@PostMapping(value = "/delete")
 	String deleteByid(@RequestParam(required = true, name = "id") String id){
 		
 		SiswaModel model = siswaService.getById(Long.valueOf(id));
