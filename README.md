@@ -11,6 +11,7 @@ What things you need to install the software and install them :
 
 * Java 17
 * Maven
+* MySQL
 
 ## Installing
 
