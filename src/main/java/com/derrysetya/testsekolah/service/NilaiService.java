@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.NilaiModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.projections.DashNilaiProjection;
 import com.derrysetya.testsekolah.repo.MapelRepo;
 import com.derrysetya.testsekolah.repo.NilaiRepo;
@@ -24,8 +25,16 @@ public class NilaiService {
 		return repo.findAll();
 	}
 	
+	public List<ComboBoxProjection> getListDistinctMapel(){
+		return repo.getListComboBoxDistinctMapel();
+	}
+	
 	public List<DashNilaiProjection> getDash(){
 		return repo.findListDash();
+	}
+	
+	public List<DashNilaiProjection> getDashByIdMapel(Long idMapel){
+		return repo.findListDashByIdMapel(idMapel);
 	}
 	
 	public NilaiModel getById(Long id) {

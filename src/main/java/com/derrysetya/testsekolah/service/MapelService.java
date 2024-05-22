@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
 import com.derrysetya.testsekolah.projections.DashMapelProjection;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.repo.MapelRepo;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
 
@@ -19,7 +19,7 @@ public class MapelService {
 	@Autowired
 	MapelRepo repo;
 	
-	public List<SelectOptionProjection> getListSelectOptProjections(){
+	public List<ComboBoxProjection> getListSelectOptProjections(){
 		return repo.findListSelectOptProjection();
 	}
 	

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.derrysetya.testsekolah.model.GuruModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.response.ApiResponse;
 import com.derrysetya.testsekolah.service.GuruService;
 import com.derrysetya.testsekolah.service.SiswaService;
@@ -59,7 +59,7 @@ public class GuruController {
 	@GetMapping(value = "/list-combo-box")
 	ApiResponse getListSelectOptions(){
 		ApiResponse resp = new ApiResponse();
-		List<SelectOptionProjection> listModel = new ArrayList<>();
+		List<ComboBoxProjection> listModel = new ArrayList<>();
 		
 		try {
 			

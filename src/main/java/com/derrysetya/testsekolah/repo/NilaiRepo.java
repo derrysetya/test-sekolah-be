@@ -12,6 +12,7 @@ import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.NilaiModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
 import com.derrysetya.testsekolah.projections.DashNilaiProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 
 @Repository
 public interface NilaiRepo extends JpaRepository<NilaiModel, Long> {
@@ -32,10 +33,20 @@ public interface NilaiRepo extends JpaRepository<NilaiModel, Long> {
 	@Query(value = "DELETE FROM NilaiModel mm WHERE mm.idMapel = :idMapel ")
 	void deleteByIdMapel(Long idMapel);
 	
-	
-	@Query(value = "select dn.id, dn.uts, dn.uas, mm.nama as mapel, ms.nama from db_sekolah.dat_nilai dn "
+	String qDash = "select dn.id, dn.uts, dn.uas, mm.nama as mapel, ms.nama from db_sekolah.dat_nilai dn "
 			+ "join db_sekolah.mst_mapel mm on mm.id = dn.id_mapel "
-			+ "join db_sekolah.mst_siswa ms on ms.id = dn.id_siswa ", nativeQuery = true)
+			+ "join db_sekolah.mst_siswa ms on ms.id = dn.id_siswa ";
+	
+	@Query(value = qDash, nativeQuery = true)
 	List<DashNilaiProjection> findListDash();
+	
+	
+	@Query(value =  qDash + " where dn.id_mapel = :idMapel ", nativeQuery = true)
+	List<DashNilaiProjection> findListDashByIdMapel(Long idMapel);
+	
+	@Query(value = "select distinct dn.id_mapel as cd, mm.nama as nama from db_sekolah.dat_nilai dn "
+			+ "join db_sekolah.mst_mapel mm on mm.id = dn.id_mapel ", nativeQuery = true)
+	List<ComboBoxProjection> getListComboBoxDistinctMapel();
+	
 
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.derrysetya.testsekolah.model.GuruModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.repo.GuruRepo;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
 
@@ -18,7 +18,7 @@ public class GuruService {
 	@Autowired
 	GuruRepo repo;
 	
-	public List<SelectOptionProjection> getListSelectOptProjections(){
+	public List<ComboBoxProjection> getListSelectOptProjections(){
 		return repo.findListSelectOptProjection();
 	}
 	

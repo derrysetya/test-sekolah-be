@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.derrysetya.testsekolah.model.SiswaModel;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 
 @Repository
 public interface SiswaRepo extends JpaRepository<SiswaModel, Long> {
@@ -20,6 +20,6 @@ public interface SiswaRepo extends JpaRepository<SiswaModel, Long> {
 	void deleteById(Long id);
 	
 	@Query(value = "select id as cd, nama from mst_siswa ", nativeQuery = true)
-	List<SelectOptionProjection> findListSelectOptProjection();
+	List<ComboBoxProjection> findListSelectOptProjection();
 
 }

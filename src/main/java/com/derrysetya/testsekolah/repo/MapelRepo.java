@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
 import com.derrysetya.testsekolah.projections.DashMapelProjection;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 
 @Repository
 public interface MapelRepo extends JpaRepository<MapelModel, Long> {
@@ -26,6 +26,6 @@ public interface MapelRepo extends JpaRepository<MapelModel, Long> {
 	List<DashMapelProjection> findListDash();
 	
 	@Query(value = "select id as cd, nama from mst_mapel ", nativeQuery = true)
-	List<SelectOptionProjection> findListSelectOptProjection();
+	List<ComboBoxProjection> findListSelectOptProjection();
 
 }

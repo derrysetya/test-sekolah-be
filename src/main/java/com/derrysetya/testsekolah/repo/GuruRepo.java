@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.derrysetya.testsekolah.model.GuruModel;
 import com.derrysetya.testsekolah.projections.DashMapelProjection;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 
 @Repository
 public interface GuruRepo extends JpaRepository<GuruModel, Long> {
@@ -21,6 +21,6 @@ public interface GuruRepo extends JpaRepository<GuruModel, Long> {
 	void deleteById(Long id);
 	
 	@Query(value = "select id as cd, nama from mst_guru ", nativeQuery = true)
-	List<SelectOptionProjection> findListSelectOptProjection();
+	List<ComboBoxProjection> findListSelectOptProjection();
 
 }

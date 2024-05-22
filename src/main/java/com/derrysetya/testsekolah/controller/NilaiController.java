@@ -1,7 +1,9 @@
 package com.derrysetya.testsekolah.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.derrysetya.testsekolah.constants.AppConstants;
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.NilaiModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.projections.DashNilaiProjection;
 import com.derrysetya.testsekolah.response.ApiResponse;
 import com.derrysetya.testsekolah.service.MapelService;
@@ -88,12 +91,20 @@ public class NilaiController {
 	@GetMapping(value = "/dash")
 	ApiResponse getDash(){
 		ApiResponse resp = new ApiResponse();
+		Map<String, Object> map = new HashMap<>();
 		List<DashNilaiProjection> listNilai = new ArrayList<>();
+		List<ComboBoxProjection> listMapelDistinct = new ArrayList<>();
 		
 		try {
 			listNilai = service.getDash();
 			resp = ResponseUtils.getSuccess();
-			resp.setResult(listNilai);
+			
+			listMapelDistinct = service.getListDistinctMapel();
+			
+			map.put("nilai", listNilai);
+			map.put("mapel", listMapelDistinct);
+			
+			resp.setResult(map);
 			return resp;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -123,6 +134,28 @@ public class NilaiController {
 			// TODO: handle exception
 			
 			System.out.println("Error get nilai by "+id);
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
+		}
+	}
+	
+	@GetMapping(value = "/mapel")
+	ApiResponse getByIdMapel(@RequestParam(required = true, name = "id") String id){
+		ApiResponse resp = new ApiResponse();
+//		return service.getById(Long.valueOf(id));
+		List<DashNilaiProjection> listNilai = new ArrayList<>();
+		try {
+			listNilai = service.getDashByIdMapel(Long.valueOf(id));
+			resp = ResponseUtils.getSuccess();
+			resp.setResult(listNilai);
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error get nilai by mapel "+id);
 			System.out.println(e.getMessage());
 			
 			resp = ResponseUtils.getFailed();

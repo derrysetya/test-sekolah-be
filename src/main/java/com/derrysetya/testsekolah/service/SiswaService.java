@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.derrysetya.testsekolah.model.SiswaModel;
-import com.derrysetya.testsekolah.projections.SelectOptionProjection;
+import com.derrysetya.testsekolah.projections.ComboBoxProjection;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
 
 @Service
@@ -16,7 +16,7 @@ public class SiswaService {
 	@Autowired
 	SiswaRepo repo;
 	
-	public List<SelectOptionProjection> getListSelectOptProjections(){
+	public List<ComboBoxProjection> getListSelectOptProjections(){
 		return repo.findListSelectOptProjection();
 	}
 	
