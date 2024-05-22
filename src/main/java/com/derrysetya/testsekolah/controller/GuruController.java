@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.derrysetya.testsekolah.model.GuruModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.projections.SelectOptionProjection;
 import com.derrysetya.testsekolah.response.ApiResponse;
 import com.derrysetya.testsekolah.service.GuruService;
 import com.derrysetya.testsekolah.service.SiswaService;
 import com.derrysetya.testsekolah.utils.ResponseUtils;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("${rest.pathPrefix:api}/guru")
 public class GuruController {
@@ -53,6 +56,32 @@ public class GuruController {
 		
 	}
 	
+	@GetMapping(value = "/list-combo-box")
+	ApiResponse getListSelectOptions(){
+		ApiResponse resp = new ApiResponse();
+		List<SelectOptionProjection> listModel = new ArrayList<>();
+		
+		try {
+			
+			listModel = service.getListSelectOptProjections();
+			
+			resp = ResponseUtils.getSuccess();
+			
+			resp.setResult(listModel);
+			
+			return resp;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			System.out.println("Error get list combo box");
+			System.out.println(e.getMessage());
+			
+			resp = ResponseUtils.getFailed();
+			
+			return resp;
+		}
+	}
+	
 	@GetMapping(value = "/all")
 	ApiResponse getAll(){
 		ApiResponse resp = new ApiResponse();
@@ -70,7 +99,7 @@ public class GuruController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			
-			System.out.println("Error get all siswa");
+			System.out.println("Error get all guru");
 			System.out.println(e.getMessage());
 			
 			resp = ResponseUtils.getFailed();
@@ -78,6 +107,7 @@ public class GuruController {
 			return resp;
 		}
 	}
+	
 	
 	@GetMapping()
 	ApiResponse getById(@RequestParam(required = true, name = "id") String id){

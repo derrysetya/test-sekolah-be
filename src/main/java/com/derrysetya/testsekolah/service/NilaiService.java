@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.NilaiModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.projections.DashNilaiProjection;
 import com.derrysetya.testsekolah.repo.MapelRepo;
 import com.derrysetya.testsekolah.repo.NilaiRepo;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
@@ -21,6 +22,10 @@ public class NilaiService {
 	
 	public List<NilaiModel> getAll(){
 		return repo.findAll();
+	}
+	
+	public List<DashNilaiProjection> getDash(){
+		return repo.findListDash();
 	}
 	
 	public NilaiModel getById(Long id) {

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.derrysetya.testsekolah.model.MapelModel;
 import com.derrysetya.testsekolah.model.SiswaModel;
+import com.derrysetya.testsekolah.projections.DashMapelProjection;
+import com.derrysetya.testsekolah.projections.SelectOptionProjection;
 import com.derrysetya.testsekolah.repo.MapelRepo;
 import com.derrysetya.testsekolah.repo.SiswaRepo;
 
@@ -17,8 +19,16 @@ public class MapelService {
 	@Autowired
 	MapelRepo repo;
 	
+	public List<SelectOptionProjection> getListSelectOptProjections(){
+		return repo.findListSelectOptProjection();
+	}
+	
 	public List<MapelModel> getAll(){
 		return repo.findAll();
+	}
+	
+	public List<DashMapelProjection> getDash(){
+		return repo.findListDash();
 	}
 	
 	public MapelModel getById(Long id) {
